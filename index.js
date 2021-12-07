@@ -6,6 +6,8 @@ const { Sequelize, Model, DataTypes } = require('sequelize');
 
 app.use(express.json());
 
+const PORT = process.env.PORT || 3001;
+
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialectOptions: {
     ssl: {
@@ -47,17 +49,33 @@ Blog.init(
   }
 );
 
-const main = async () => {
-  try {
-    await sequelize.authenticate();
-    const blogs = await Blog.findAll();
-    blogs.map((blog) => {
-      console.log(`${blog.author}: '${blog.title}', ${blog.likes} likes`);
-    });
-    sequelize.close();
-  } catch (error) {
-    console.error('Unable to connect to the DB', error);
-  }
-};
+app.get('/', async (_req, res) => {
+  const blogs = await Blog.findAll();
+  res.json(blogs);
+});
 
-main();
+app.post('/api/blogs', async (req, res) => {
+  try {
+    const newBlog = await Blog.create(req.body);
+    return res.json(newBlog);
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
+
+app.delete('/api/blogs/:id', async (req, res) => {
+  try {
+    const blogToDelete = await Blog.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+    return res.status(200);
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`App is running on port ${PORT}`);
+});
