@@ -12,7 +12,10 @@ router.post('/', async (req, res) => {
     const newBlog = await Blog.create(req.body);
     return res.json(newBlog);
   } catch (error) {
-    return res.status(400).json({ error });
+    console.log(error.name);
+    res.status(500).send({
+      error: 'An error occured while trying to save a new blog'
+    });
   }
 });
 
@@ -27,11 +30,18 @@ router.delete('/:id', blogFinder, async (req, res) => {
 
 router.put('/:id', blogFinder, async (req, res) => {
   if (req.blog) {
-    req.blog.likes = req.body.likes;
-    await req.blog.save();
-    res.json(req.blog);
+    try {
+      req.blog.likes = req.body.likes;
+      await req.blog.save();
+      res.json(req.blog);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        error: 'An error occured while trying to update the likes'
+      });
+    }
   } else {
-    res.status(404).end();
+    res.status(404).send({ error: 'Blog does not exist.' });
   }
 });
 
