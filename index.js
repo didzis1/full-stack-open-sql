@@ -64,16 +64,14 @@ app.post('/api/blogs', async (req, res) => {
 });
 
 app.delete('/api/blogs/:id', async (req, res) => {
-  try {
-    const blogToDelete = await Blog.destroy({
-      where: {
-        id: req.params.id
-      }
-    });
-    return res.status(200);
-  } catch (error) {
-    return res.status(400).json({ error });
+  const blog = await Blog.findByPk(req.params.id);
+
+  // If blog exists, delete it
+  if (blog) {
+    await blog.destroy();
   }
+
+  res.status(204).end();
 });
 
 app.listen(PORT, () => {
