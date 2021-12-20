@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJqb2huQGdtYWlsLmNvbSIsImlhdCI6MTYzOTk5MDU2NX0.nrJG7kHh4tAol-dzhyG-txYWqlcahvqXrqZ2Y578M0A
+
+{
+    "author": "Fox Mulder",
+    "url": "x-files.com",
+    "title": "X Files 2",
+    "likes": 10
+}
