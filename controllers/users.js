@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Blog } = require('../models');
 const bcrypt = require('bcrypt');
 
 router.get('/', async (_, res) => {
@@ -8,6 +8,9 @@ router.get('/', async (_, res) => {
       attributes: {
         // Exclude password from return values
         exclude: ['passwordHash']
+      },
+      include: {
+        model: Blog
       }
     });
     res.json(users);
@@ -35,9 +38,8 @@ router.post('/', async (req, res) => {
       updatedAt: newUser.updatedAt
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
-      error: 'An error occured while trying to create a user'
+      error: `An error occured while trying to create a user: ${error.message}`
     });
   }
 });
