@@ -9,6 +9,7 @@ router.get('/', async (_, res) => {
         // Exclude password from return values
         exclude: ['passwordHash']
       },
+      // Include blog information
       include: {
         model: Blog
       }
@@ -24,7 +25,7 @@ router.get('/', async (_, res) => {
 
 router.post('/', async (req, res) => {
   const { username, name, password } = req.body;
-  const hashedPassword = await bcrypt.hashSync(password, 10);
+  const hashedPassword = bcrypt.hashSync(password, 10);
   try {
     const newUser = await User.create({
       username,
