@@ -34,7 +34,6 @@ router.get('/', async (_req, res) => {
 });
 
 router.post('/', tokenExtractor, async (req, res) => {
-  console.log('DECODED TOKEN', req.decodedToken);
   try {
     const user = await User.findOne({
       where: {
@@ -51,10 +50,12 @@ router.post('/', tokenExtractor, async (req, res) => {
   }
 });
 
-router.delete('/:id', blogFinder, async (req, res) => {
-  // If blog exists, delete it
-  if (req.blog) {
-    await req.blog.destroy();
+router.delete('/:id', blogFinder, tokenExtractor, async (req, res) => {
+  const blog = req.blog;
+  if (blog) {
+    if (blog.userId === req.decodedToken.id) {
+      await blog.destroy();
+    }
   }
 
   res.status(204).end();
