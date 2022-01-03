@@ -9,7 +9,8 @@ router.get('/', async (req, res) => {
       [sequelize.fn('sum', sequelize.col('likes')), 'likes'],
       [sequelize.fn('count', sequelize.col('id')), 'blogs']
     ],
-    group: 'author'
+    group: 'author',
+    order: sequelize.literal('likes DESC')
   });
 
   return res.json(blogs);
