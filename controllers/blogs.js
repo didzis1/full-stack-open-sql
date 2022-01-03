@@ -25,8 +25,19 @@ router.get('/', async (req, res) => {
   let where = {};
 
   if (req.query.search) {
-    where.title = {
-      [Op.match]: Sequelize.fn('to_tsquery', req.query.search)
+    where = {
+      [Op.or]: [
+        {
+          author: {
+            [Op.match]: Sequelize.fn('to_tsquery', req.query.search)
+          }
+        },
+        {
+          title: {
+            [Op.match]: Sequelize.fn('to_tsquery', req.query.search)
+          }
+        }
+      ]
     };
   }
 
