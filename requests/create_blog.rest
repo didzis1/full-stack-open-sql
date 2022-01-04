@@ -1,10 +1,11 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJqb2huQGdtYWlsLmNvbSIsImlhdCI6MTYzOTk5MDU2NX0.nrJG7kHh4tAol-dzhyG-txYWqlcahvqXrqZ2Y578M0A
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkYW5hMUBnbWFpbC5jb20iLCJpYXQiOjE2NDEyODY5NzB9.uhpIBYZzR5FdxOffxAWIioMbnwMsbzIhvkFYnLhHISM
 
 {
-    "author": "Fox Mulder",
-    "url": "x-files.com",
-    "title": "X Files 2",
-    "likes": 10
+    "author": "Dana Scully",
+    "url": "dana.com",
+    "title": "Autopsy records Vol 2",
+    "likes": 100,
+		"year": 2022
 }
