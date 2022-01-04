@@ -1,11 +1,11 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkYW5hMUBnbWFpbC5jb20iLCJpYXQiOjE2NDEyODY5NzB9.uhpIBYZzR5FdxOffxAWIioMbnwMsbzIhvkFYnLhHISM
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJkaWR6aXMxQGdtYWlsLmNvbSIsImlhdCI6MTY0MTI5NzUxMn0.ED2Tr1W0gEv2DQsFS-h7Icqzi-g_Twb6joTu4R7bpak
 
 {
-    "author": "Dana Scully",
-    "url": "dana.com",
-    "title": "Autopsy records Vol 2",
-    "likes": 100,
-		"year": 2022
+    "author": "Andrejz",
+    "url": "witcher.com",
+    "title": "Witcher 1",
+    "likes": 3252,
+		"year": 1999
 }

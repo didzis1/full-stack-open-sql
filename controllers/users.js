@@ -10,9 +10,11 @@ router.get('/', async (_, res) => {
         exclude: ['passwordHash']
       },
       // Include blog information
-      include: {
-        model: Blog
-      }
+      include: [
+        {
+          model: Blog
+        }
+      ]
     });
     res.json(users);
   } catch (error) {
@@ -21,6 +23,38 @@ router.get('/', async (_, res) => {
       error: 'An error occured while trying to fetch all users'
     });
   }
+});
+
+router.get('/:id', async (req, res) => {
+  let user;
+  try {
+    user = await User.findByPk(req.params.id, {
+      attributes: ['name', 'username'],
+      include: [
+        // Show all blogs that the user HAS written
+        // {
+        //   model: Blog
+        // },
+        {
+          model: Blog,
+          as: 'readListBlogs',
+          attributes: {
+            exclude: ['userId']
+          },
+          through: {
+            attributes: []
+          }
+        }
+      ]
+    });
+  } catch (error) {
+    console.log('ERROR:', error.message);
+    return res.status(500).send({ error: 'Error while trying to fetch user' });
+  }
+
+  if (!user) return res.status(500).send({ error: 'User not found' });
+
+  return res.json(user);
 });
 
 router.post('/', async (req, res) => {
