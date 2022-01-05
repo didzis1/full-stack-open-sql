@@ -2,30 +2,30 @@ const { DataTypes } = require('sequelize');
 
 module.exports = {
   up: async (queryInterface) => {
-    await queryInterface.createTable('reading_lists', {
+    await queryInterface.createTable('sessions', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
+      },
+      token: {
+        type: DataTypes.STRING,
+        allowNull: false
       },
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: { model: 'users', key: 'id' }
       },
-      blog_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: 'blogs', key: 'id' }
+      created_at: {
+        type: DataTypes.DATE
       },
-      is_read: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
+      updated_at: {
+        type: DataTypes.DATE
       }
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('reading_lists');
+    await queryInterface.dropTable('sessions');
   }
 };
