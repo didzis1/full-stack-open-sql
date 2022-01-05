@@ -1,11 +1,11 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJkaWR6aXMxQGdtYWlsLmNvbSIsImlhdCI6MTY0MTI5NzUxMn0.ED2Tr1W0gEv2DQsFS-h7Icqzi-g_Twb6joTu4R7bpak
+Authorization: bearer X
 
 {
-    "author": "Andrejz",
-    "url": "witcher.com",
-    "title": "Witcher 1",
+    "author": "This author is not banned",
+    "url": "witcher.com121",
+    "title": "Witcher 1233",
     "likes": 3252,
 		"year": 1999
 }
